@@ -1,4 +1,5 @@
-package com.example.lisacampbell.api; /**
+package com.example.lisacampbell.api;
+/**
  * Created by georgeruan on 7/25/15.
  */
 
@@ -88,6 +89,4 @@ public class Api {
 
         return match;
     }
-
-
 }
