@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SharpshooterApp</string>
     <string name="title_activity_first_login">FirstLoginActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="login">Hello!  Welcome to Sharpshooter! </string>
+    <string name="real_name"></string>
     <string name="action_settings">Settings</string>
 </resources>
