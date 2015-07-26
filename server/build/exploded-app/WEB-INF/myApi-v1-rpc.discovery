@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/x4tTGhWUh832O2Dfw-5o79y5juw\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/5-LTNNd_hq5kKB2w5ZB8lNDrQuM\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -264,6 +264,25 @@
    ],
    "returns": {
     "$ref": "PlayerResponse"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myApi.playerAlive": {
+   "id": "myApi.playerAlive",
+   "allowGet": true,
+   "parameters": {
+    "playerId": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "playerId"
+   ],
+   "returns": {
+    "$ref": "BooleanResponse"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

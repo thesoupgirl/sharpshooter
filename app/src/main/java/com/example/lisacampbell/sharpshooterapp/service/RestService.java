@@ -1,7 +1,6 @@
 package com.example.lisacampbell.sharpshooterapp.service;
 
-import com.example.lisacampbell.backend.myApi.model.BooleanResponse;
-import com.example.lisacampbell.backend.myApi.model.PlayerResponse;
+import com.example.lisacampbell.sharpshooterapp.service.HttpRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +15,7 @@ import java.util.UUID;
  */
 public class RestService {
     private static RestService instance = null;
-    private static final String baseUrl = "sharpshooter-1017.appspot.com/_ah/api/myApi/v1/";
+    private static final String baseUrl = "https://sharpshooter-1017.appspot.com/_ah/api/myApi/v1/";
 
     private RestService() {
         /* Override default constructor */
@@ -26,7 +25,7 @@ public class RestService {
      * Public instantiator of the singleton
      * @return The single instance of the class
      */
-    public static RestService generateAppId() {
+    public static RestService generateInstance() {
         if(instance == null) {
             instance = new RestService();
         }
@@ -59,8 +58,11 @@ public class RestService {
      * Sends a request to the server to start the game
      */
     public void startGame() {
-        int response = HttpRequest.post(baseUrl + "startGame").send("").code();
+        HttpRequest request = HttpRequest.post(baseUrl + "startGame");
+        request.trustAllCerts();
+        request.trustAllHosts();
 
+        int response = request.code();
         if(response != 200) {
             System.out.println("Error with code " + response);
         }

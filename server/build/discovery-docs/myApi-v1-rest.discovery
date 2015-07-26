@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/x4tTGhWUh832O2Dfw-5o79y5juw\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/5-LTNNd_hq5kKB2w5ZB8lNDrQuM\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -278,6 +278,27 @@
    ],
    "response": {
     "$ref": "PlayerResponse"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "playerAlive": {
+   "id": "myApi.playerAlive",
+   "path": "checkPlayerAlive/{playerId}",
+   "httpMethod": "GET",
+   "parameters": {
+    "playerId": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "playerId"
+   ],
+   "response": {
+    "$ref": "BooleanResponse"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
