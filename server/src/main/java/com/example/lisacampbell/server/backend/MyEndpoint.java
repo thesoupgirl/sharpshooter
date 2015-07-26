@@ -106,7 +106,7 @@ public class MyEndpoint {
 
     @ApiMethod(name = "addPlayer", httpMethod = "POST")
     public Player addPlayer(@Named("name") String name) {
-        Player player = new Player(name, "", "");
+        Player player = new Player(name);
         game.addPlayer(player);
         return player;
     }

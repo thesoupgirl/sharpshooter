@@ -1,6 +1,6 @@
 package com.example.lisacampbell.sharpshooterapp.service;
 
-import android.util.Log;
+import android.os.StrictMode;
 
 import com.example.lisacampbell.sharpshooterapp.service.HttpRequest;
 
@@ -43,17 +43,9 @@ public class RestService {
         String id = "";
 
         try {
-            HttpRequest request = HttpRequest.post(baseUrl + "addPlayer");
-            request.trustAllCerts();
-            request.trustAllHosts();
-
-            System.out.println(request.send("name=" + name).body().toString());
-            System.out.println("YOYOYOYYOYOYOY");
-
-            /*Log.d("YOYOYYOYOYOYOYOOYOYOYOO", player);
-            System.out.println(player);
+            HttpRequest.post(baseUrl + "addPlayer/" + name);
+            String player = HttpRequest.get(baseUrl + "lastPlayer").body();
             id = new JSONObject(player).getString("id");
-            */
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -148,8 +140,9 @@ public class RestService {
             request.trustAllCerts();
             request.trustAllHosts();
 
-            success = new JSONObject(request.send("killerId=" + killerId)
-                    .send("killNumber=" + killNumber).body()).getBoolean("response");
+            request.parameter("killerId", killerId);
+            request.parameter("killNumber", killNumber);
+            success = new JSONObject(request.body()).getBoolean("response");
         }
         catch (Exception e) {
             e.printStackTrace();
