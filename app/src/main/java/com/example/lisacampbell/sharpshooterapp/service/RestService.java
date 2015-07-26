@@ -1,5 +1,7 @@
 package com.example.lisacampbell.sharpshooterapp.service;
 
+import android.util.Log;
+
 import com.example.lisacampbell.sharpshooterapp.service.HttpRequest;
 
 import org.json.JSONArray;
@@ -45,9 +47,13 @@ public class RestService {
             request.trustAllCerts();
             request.trustAllHosts();
 
-            String player = request.send("name=" + name).body();
+            System.out.println(request.send("name=" + name).body().toString());
+            System.out.println("YOYOYOYYOYOYOY");
 
+            /*Log.d("YOYOYYOYOYOYOYOOYOYOYOO", player);
+            System.out.println(player);
             id = new JSONObject(player).getString("id");
+            */
         }
         catch (Exception e) {
             e.printStackTrace();

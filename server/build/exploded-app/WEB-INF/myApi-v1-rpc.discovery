@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/5-LTNNd_hq5kKB2w5ZB8lNDrQuM\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/kknzDnrOPV-8cqMI82lP7-Igxb4\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -192,23 +192,13 @@
   "myApi.addPlayer": {
    "id": "myApi.addPlayer",
    "parameters": {
-    "byteString": {
-     "type": "string",
-     "required": true
-    },
     "name": {
-     "type": "string",
-     "required": true
-    },
-    "regId": {
      "type": "string",
      "required": true
     }
    },
    "parameterOrder": [
-    "name",
-    "regId",
-    "byteString"
+    "name"
    ],
    "returns": {
     "$ref": "Player"

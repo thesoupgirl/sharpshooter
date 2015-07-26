@@ -87,6 +87,18 @@ public class BeforePhoto extends Fragment{
                 ft.commit();
             }
         });
+
+        checkStatus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Fragment frag = new Loser();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.screen, frag);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
         //onSubmit(v);
         return v;
     }

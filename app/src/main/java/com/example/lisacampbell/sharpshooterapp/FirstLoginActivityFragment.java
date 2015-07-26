@@ -68,8 +68,8 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
     @Override
     public void onClick(View v) {
         userName = name.getText().toString();
-//
-//        id = service.addPlayer(userName, "", "");
+
+//        id = service.addPlayer(userName);
 //        Log.d(id, "========================================================================"+id);
         this.activity.onSubmit();
     }
