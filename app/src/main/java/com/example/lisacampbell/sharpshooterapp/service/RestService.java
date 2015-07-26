@@ -91,9 +91,8 @@ public class RestService {
     public String getTarget(String playerId) {
         String response = "";
         try {
-            HttpRequest request = HttpRequest.get(baseUrl + "getTargetFor");
-            request.trustAllCerts();
-            request.trustAllHosts();
+            HttpRequest.get(baseUrl + "getTargetFor");
+            HttpRequest request = HttpRequest.get(baseUrl + "lastTarget");
 
             response = new JSONObject(request.send("playerId=" + playerId).body()).getString("name");
         }
@@ -134,21 +133,18 @@ public class RestService {
      * @return Whether the attempt was successful.
      */
     public Boolean attemptKill(String killerId, String killNumber) {
-        Boolean success = false;
+        Boolean gameOver = false;
         try {
-            HttpRequest request = HttpRequest.delete(baseUrl + "attemptKill");
-            request.trustAllCerts();
-            request.trustAllHosts();
+            HttpRequest.delete(baseUrl + "attemptKill/" + killerId + "/" + killNumber);
+            HttpRequest request = HttpRequest.get(baseUrl + "lastKill");
 
-            request.parameter("killerId", killerId);
-            request.parameter("killNumber", killNumber);
-            success = new JSONObject(request.body()).getBoolean("response");
+            gameOver = new JSONObject(request.body()).getBoolean("response");
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        return success;
+        return gameOver;
     }
 
     /**
@@ -159,9 +155,8 @@ public class RestService {
     public Boolean playerAlive(String playerId) {
         Boolean alive = false;
         try {
-            HttpRequest request = HttpRequest.post(baseUrl + "playerAlive");
-            request.trustAllCerts();
-            request.trustAllHosts();
+            HttpRequest.post(baseUrl + "playerAlive/" + playerId);
+            HttpRequest request = HttpRequest.get(baseUrl + "lastAliveQuery");
 
             alive = new JSONObject(request.send("playerId=" + playerId).body())
                     .getBoolean("response");
