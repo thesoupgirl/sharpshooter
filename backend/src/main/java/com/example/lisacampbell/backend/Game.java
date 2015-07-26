@@ -1,5 +1,7 @@
 package com.example.lisacampbell.backend;
 
+import com.google.api.server.spi.response.ConflictException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +30,7 @@ public class Game {
 
     public boolean startGame() {
         if (this.inProgress) {
-            return false;
+            return true;
         }
 
         this.inProgress = assignTargets();
@@ -74,12 +76,21 @@ public class Game {
         this.inProgress = inProgress;
     }
 
-    //return true if the game is over, false otherwise
-    public boolean executeKill(Player killer) {
+
+    public boolean attemptKill(Player killer, String killNumber) throws ConflictException {
         if (!players.values().contains(killer)) {
             return false;
         }
 
+        if(killer.getTarget().getKillNumber().equals(killNumber)) {
+            return executeKill(killer);
+        }
+
+        throw new ConflictException("wrong kill number");
+    }
+
+    //return true if the game is over, false otherwise
+    private boolean executeKill(Player killer) {
         players.remove(killer.getTarget().getId());
         killer.killTarget();
         globalKillCount++;

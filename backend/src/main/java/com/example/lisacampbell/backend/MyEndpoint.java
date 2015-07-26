@@ -10,7 +10,9 @@ package com.example.lisacampbell.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
+import com.google.appengine.repackaged.com.google.api.client.util.Base64;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,13 +38,23 @@ public class MyEndpoint {
         game.addPlayer(new Player("claire"));
     }
 
-    /**
-     * A simple endpoint method that takes a name and says Hi back
-     */
+
     @ApiMethod(name = "startGame", httpMethod = "POST")
     public BooleanResponse startGame() {
         BooleanResponse response = new BooleanResponse();
         response.setResponse(game.startGame());
+        return response;
+    }
+
+    @ApiMethod(name = "attemptKill", httpMethod = "DELETE")
+    public BooleanResponse attemptKill(@Named("killerId") String killerId,@Named("killNumber") String killNumber) throws NotFoundException, ConflictException {
+        if (!game.getPlayers().containsKey(UUID.fromString(killerId))) {
+            throw new NotFoundException("player not found");
+        }
+
+        Player killer = game.getPlayers().get(UUID.fromString(killerId));
+        BooleanResponse response = new BooleanResponse();
+        response.setResponse(game.attemptKill(killer, killNumber));
         return response;
     }
 
@@ -55,19 +67,19 @@ public class MyEndpoint {
         return players;
     }
 
-    @ApiMethod(name = "kill", httpMethod = "DELETE")
-    public BooleanResponse kill(@Named("killerId") String killerId) throws NotFoundException {
-        HashMap<UUID, Player> players = game.getPlayers();
-        UUID id = UUID.fromString(killerId);
-        if (!players.containsKey(id)) {
-            throw new NotFoundException("player not found");
-        }
-
-        System.out.println(players.get(id).getName() + " to kill " + players.get(id).getTarget().getName());
-        BooleanResponse response = new BooleanResponse();
-        response.setResponse(game.executeKill(players.get(id)));
-        return response;
-    }
+//    @ApiMethod(name = "kill", httpMethod = "DELETE")
+//    public BooleanResponse kill(@Named("killerId") String killerId) throws NotFoundException {
+//        HashMap<UUID, Player> players = game.getPlayers();
+//        UUID id = UUID.fromString(killerId);
+//        if (!players.containsKey(id)) {
+//            throw new NotFoundException("player not found");
+//        }
+//
+//        System.out.println(players.get(id).getName() + " to kill " + players.get(id).getTarget().getName());
+//        BooleanResponse response = new BooleanResponse();
+//        response.setResponse(game.executeKill(players.get(id)));
+//        return response;
+//    }
 
     @ApiMethod(name = "getTargetFor", httpMethod = "GET")
     public PlayerResponse getTarget(@Named("playerId") String playerId) throws NotFoundException{
@@ -88,8 +100,8 @@ public class MyEndpoint {
 
 
     @ApiMethod(name = "addPlayer", httpMethod = "POST")
-    public Player addPlayer(@Named("name") String name) {
-        Player player = new Player(name);
+    public Player addPlayer(@Named("name") String name, @Named("byteString") String byteString) {
+        Player player = new Player(name, byteString);
         game.addPlayer(player);
         return player;
     }

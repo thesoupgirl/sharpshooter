@@ -8,11 +8,13 @@ import java.util.UUID;
 public class PlayerResponse {
     private UUID id;
     private String name;
+    private String killNumber;
     private TargetResponse target;
 
     public PlayerResponse(Player player) {
         this.id = player.getId();
         this.name = player.getName();
+        this.killNumber = player.getKillNumber();
         this.target = new TargetResponse(player.getTarget());
     }
 
@@ -20,23 +22,15 @@ public class PlayerResponse {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public TargetResponse getTarget() {
         return target;
     }
 
-    public void setTarget(TargetResponse target) {
-        this.target = target;
+    public String getKillNumber() {
+        return killNumber;
     }
 }

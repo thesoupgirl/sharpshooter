@@ -8,25 +8,24 @@ import java.util.UUID;
 public class TargetResponse {
     private UUID id;
     private String name;
+    private String pictureByteString;
 
     public TargetResponse(Player player) {
         this.id = player.getId();
         this.name = player.getName();
+        this.pictureByteString = player.getPictureByteString();
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPictureByteString() {
+        return pictureByteString;
     }
 }

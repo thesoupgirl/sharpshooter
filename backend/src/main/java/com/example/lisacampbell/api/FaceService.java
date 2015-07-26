@@ -10,7 +10,7 @@ import com.facepp.http.PostParameters;
 import org.json.JSONObject;
 
 public class FaceService {
-    private static final HttpRequests httpRequests = new HttpRequests("c0f25c4a3284aa6bffbeaeee4b1047b9", "YwB89qNNLBza9BDQvj_8nJSbrFkaCALv", true, true);
+    private static final HttpRequests httpRequests = new HttpRequests("bf429197e5e13ad20f004c8b7c87f8c0", "fDSJeNwXsSv5P1vVbhcRjE5uiQwZeJiH", true, true);
 
     public FaceService() {
         // Do nothing
@@ -31,6 +31,7 @@ public class FaceService {
         }
         catch (Exception e) {
             e.printStackTrace();
+            personId = "exception id";
         }
 
         return personId;

@@ -1,6 +1,9 @@
 package com.example.lisacampbell.backend;
 
-import java.io.Serializable;
+import com.example.lisacampbell.api.FaceService;
+import com.google.appengine.repackaged.com.google.api.client.util.Base64;
+
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -11,26 +14,47 @@ public class Player {
     private String name;
     private Player target;
     private int killCount;
-    private String personId;
+    private String killNumber;
+    private String pictureByteString;
 
     public Player(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.killCount = 0;
+        this.killNumber = getRandomKillNumber();
         this.target = null;
-        this.personId = createPerson();
+        this.pictureByteString = "no picture";
     }
 
-    public static String createPerson() {
-        return "paceholder person id";
+    public Player(String name, String pictureByteString) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.killCount = 0;
+        this.killNumber = getRandomKillNumber();
+        this.target = null;
+        this.pictureByteString = pictureByteString;
+    }
+
+
+    private static String getRandomKillNumber() {
+        Random random = new Random();
+        Integer num = random.nextInt(89999) + 10000;
+        return num.toString();
+    }
+
+    private String createPerson(String[] byteStrings) {
+        String personId = FaceService.createPerson(this.name);
+        for (int i = 0; i < byteStrings.length; i++) {
+            byte[] bytes = Base64.decodeBase64(byteStrings[i]);
+            String faceId = FaceService.uploadFace(bytes);
+            FaceService.personAddFace(personId, faceId);
+        }
+
+        return personId;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Player getTarget() {
@@ -50,16 +74,12 @@ public class Player {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public String getKillNumber() {
+        return killNumber;
     }
 
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
+    public String getPictureByteString() {
+        return pictureByteString;
     }
 
     public void killTarget() {
