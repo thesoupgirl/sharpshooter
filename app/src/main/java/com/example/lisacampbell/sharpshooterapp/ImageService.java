@@ -71,6 +71,10 @@ public class ImageService {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    public byte[] stringToByteArray(String str) {
+        return Base64.decode(str, Base64.DEFAULT);
+    }
+
 
     public void deleteImages() throws IOException {
         for(File file : photos) {
