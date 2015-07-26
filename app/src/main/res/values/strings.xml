@@ -4,4 +4,9 @@
     <string name="login">Hello!  Welcome to Sharpshooter! </string>
     <string name="real_name"></string>
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="frontalSelfie">Your Number is: </string>
+    <string name="number">11111</string>
 </resources>

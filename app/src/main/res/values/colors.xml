@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="buttoncolor">#BAB293</color>
+    <color name="gamefontcolor">#A39770</color>
+    <color name="backgroundycolor">#EFE4BD</color>
+    <color name="darky">#2B2922</color>
+    <color name="kill">#A32500</color>
+</resources>

@@ -7,21 +7,41 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Button;
+import com.gc.materialdesign.views.ButtonRectangle;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.util.Log;
+import android.graphics.drawable.Drawable;
+import android.content.Context;
 
 
-public class FirstLoginActivity extends AppCompatActivity {
+public class FirstLoginActivity extends AppCompatActivity implements SubmitCallbackListener{
 
-    private TextView login; //text at top, static
-    private EditText name; //name of user
+    private FirstLoginActivityFragment firstLoginActivityFragment;
+    private BeforePhoto beforePhoto;
+
+//    public FirstLoginActivity firstLogin = new FirstLoginActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_login);
+        this.firstLoginActivityFragment = FirstLoginActivityFragment.newInstance(this);
+        this.beforePhoto = BeforePhoto.newInstance(this);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.fragment, this.firstLoginActivityFragment);
+        ft.commit();
 
-        login = (TextView) findViewById(R.id.login);
-        name = (EditText) findViewById(R.id.name);
 
+    }
+
+    public void replaceDataFragment(Fragment fra){
+        android.app.FragmentTransaction ftr = getFragmentManager().beginTransaction();
+        ftr.replace(R.id.content_frame, fra);
+        ftr.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ftr.commit();
     }
 
 
@@ -45,5 +65,19 @@ public class FirstLoginActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void onSubmit() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        BeforePhoto frag = BeforePhoto.newInstance(this);
+
+        ft.replace(R.id.first, frag);
+        Log.d("fuck me", "blow me");
+        ft.commit();
+    }
+
+    public static Drawable getDrawable(String name) {
+        Context context = MyApp.getContext();
+        int resourceId = context.getResources().getIdentifier(name, "drawable", MyApp.getContext().getPackageName());
+        return context.getResources().getDrawable(resourceId);
     }
 }
