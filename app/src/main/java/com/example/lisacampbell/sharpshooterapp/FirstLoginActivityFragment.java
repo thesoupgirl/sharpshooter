@@ -17,6 +17,7 @@ import com.example.lisacampbell.sharpshooterapp.service.RestService;
  * A placeholder fragment containing a simple view.
  */
 public class FirstLoginActivityFragment extends Fragment implements OnClickListener {
+    public static int count;
     public SubmitCallbackListener activity;
     private TextView login; //text at top, static
     private EditText name; //place holder name of user
@@ -40,7 +41,7 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
         View blah = inflater.inflate(R.layout.fragment_first_login, container, false);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
+        count++;
         login = (TextView) blah.findViewById(R.id.login);
         name = (EditText) blah.findViewById(R.id.name);
         next = (ButtonRectangle) blah.findViewById(R.id.next);
@@ -68,7 +69,7 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
     @Override
     public void onClick(View v) {
         userName = name.getText().toString();
-
+//
 //        id = service.addPlayer(userName);
 //        Log.d(id, "========================================================================"+id);
         this.activity.onSubmit();

@@ -15,6 +15,6 @@
     <string name="person"> You lost! </string>
     <string name="targety"> Your target is: </string>
     <string name="ready"> Ready, set, ... </string>
-    <string name="blank"> N/A </string>
+    <string name="blank"> Kieran </string>
     <string name="almostReady"> The game is about to start! </string>
 </resources>
