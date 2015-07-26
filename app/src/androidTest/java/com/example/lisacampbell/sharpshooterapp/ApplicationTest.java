@@ -1,5 +1,4 @@
 package com.example.lisacampbell.sharpshooterapp;
-
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
