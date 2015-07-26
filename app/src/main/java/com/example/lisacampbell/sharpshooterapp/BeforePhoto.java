@@ -65,7 +65,7 @@ public class BeforePhoto extends Fragment implements OnClickListener{
         View v = inflater.inflate(R.layout.fragment_before_photo, container, false);
         cameraBtn = (ButtonRectangle) v.findViewById(R.id.cameraBtn);
         top = (TextView) v.findViewById(R.id.frontalSelfie);
-        top.setGravity(Gravity.CENTER_VERTICAL);
+        top.setGravity(Gravity.CENTER_HORIZONTAL);
         onSubmit(v);
         return v;
     }

@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lisacampbell.sharpshooterapp.StartGame">
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/start_game"
+        tools:context="com.example.lisacampbell.sharpshooterapp.StartGame"
+        android:background="@color/darky"
+        android:layoutMode="clipBounds"
+        android:paddingTop="30dp"
+        android:paddingLeft="10dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView android:layout_width="230dp" android:layout_height="match_parent"
+        android:text="@string/start"
+        android:id="@+id/label"
+        android:textSize="35dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/backgroundycolor"/>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/kill"
+            android:text="Join Game"
+            android:clickable="true"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+</FrameLayout>
+</FrameLayout>
