@@ -1,6 +1,7 @@
 package com.example.lisacampbell.sharpshooterapp;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,26 +15,24 @@ import android.support.v4.content.ContextCompat;
 import com.gc.materialdesign.views.ButtonRectangle;
 import android.widget.TextView;
 import android.view.Gravity;
+import java.util.Random;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BeforePhoto.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BeforePhoto#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class BeforePhoto extends Fragment implements OnClickListener{
+public class BeforePhoto extends Fragment{
 
     public SubmitCallbackListener activity;
-    public MyApp myApp;
+    //public MyApp myApp;
     private ButtonRectangle cameraBtn; //camera button
     private TextView top;
+    private TextView num;
+    private TextView info;
+    private TextView targetName;
+    public String thingy;
+    public int victimNum; //number that person can be killed by
     //private OnFragmentInteractionListener mListener;
 //    private Drawable camera;
 
-    // TODO: Rename and change types and number of parameters
+
     public static BeforePhoto newInstance(SubmitCallbackListener activity) {
         BeforePhoto f = new BeforePhoto();
 
@@ -45,14 +44,16 @@ public class BeforePhoto extends Fragment implements OnClickListener{
         // Required empty public constructor
     }
 
-    public static Drawable getDrawable(String name) {
-        Context context = MyApp.getContext();
-        int resourceId = context.getResources().getIdentifier(name, "drawable", MyApp.getContext().getPackageName());
-        return ContextCompat.getDrawable(context, resourceId);
-    }
+//    public static Drawable getDrawable(String name) {
+//        Context context = MyApp.getContext();
+//        int resourceId = context.getResources().getIdentifier(name, "drawable", MyApp.getContext().getPackageName());
+//        return ContextCompat.getDrawable(context, resourceId);
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        victimNum = randInt(11111,99998);
+        thingy =  String.valueOf(victimNum);
         super.onCreate(savedInstanceState);
       //Drawable d = myApp.getDrawable("/Users/lisacampbell/SharpshooterApp/app/build/intermediates/res/debug/drawable-xhdpi/ic_camera_alt_black_18dp.png");
 
@@ -65,12 +66,42 @@ public class BeforePhoto extends Fragment implements OnClickListener{
         View v = inflater.inflate(R.layout.fragment_before_photo, container, false);
         cameraBtn = (ButtonRectangle) v.findViewById(R.id.cameraBtn);
         top = (TextView) v.findViewById(R.id.frontalSelfie);
-        top.setGravity(Gravity.CENTER_HORIZONTAL);
-        onSubmit(v);
+        num = (TextView) v.findViewById(R.id.numberID);
+        info = (TextView) v.findViewById(R.id.target);
+        targetName = (TextView) v.findViewById(R.id.targetName);
+
+       num.setText((CharSequence) thingy);
+       // top.setGravity(Gravity.CENTER_HORIZONTAL);
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Fragment frag = new WinScreen();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.screen, frag);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+        //onSubmit(v);
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    public static int randInt(int min, int max) {
+
+        // NOTE: Usually this should be a field rather than a method
+        // variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
+
+
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);
@@ -94,27 +125,17 @@ public class BeforePhoto extends Fragment implements OnClickListener{
 //        mListener = null;
 //    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
 
-    public void onClick(View v) {
-
-    }
+//    public interface OnFragmentInteractionListener {
+//        public void onFragmentInteraction(Uri uri);
+//    }
+////
+//    public void onClick(View v) {
+//
+//    }
 
     public void onSubmit(View v) {
-
+        this.activity.onSubmit();
     }
 
 }

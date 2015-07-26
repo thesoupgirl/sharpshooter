@@ -1,0 +1,39 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lisacampbell.sharpshooterapp.WinScreen">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/win_game"
+        tools:context="com.example.lisacampbell.sharpshooterapp.StartGame"
+        android:background="@color/darky"
+        android:layoutMode="clipBounds"
+        android:paddingTop="30dp"
+        android:paddingLeft="10dp">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView android:layout_width="230dp" android:layout_height="207dp"
+            android:text="@string/congrats"
+            android:id="@+id/label"
+            android:textSize="32dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/backgroundycolor"/>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/newgame"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:background="@color/kill"
+            android:text="New Game"
+            android:clickable="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="130dp" />
+</FrameLayout>
+</FrameLayout>

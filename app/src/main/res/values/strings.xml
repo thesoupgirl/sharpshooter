@@ -10,4 +10,7 @@
     <string name="frontalSelfie">Your Number is: </string>
     <string name="number">11111</string>
     <string name="start">Click the button below to start the game! </string>
+    <string name="congrats"> Congratulations on winning the game! </string>
+    <string name="targety"> Your target is: </string>
+    <string name="blank"> N/A </string>
 </resources>

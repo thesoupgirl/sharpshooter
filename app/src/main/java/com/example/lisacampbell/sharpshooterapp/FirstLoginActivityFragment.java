@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import com.gc.materialdesign.views.ButtonRectangle;
-
+import android.util.Log;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -19,7 +19,7 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
     private TextView login; //text at top, static
     private EditText name; //place holder name of user
     private ButtonRectangle next; //next button
-    public String userName; //value inputted by user
+    public static String userName; //value inputted by user
     public boolean clicky = false;
 
     public FirstLoginActivityFragment() {
@@ -49,11 +49,18 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
 //                    }
 //                }
 //        );
+
     return blah;
   }
 
+    public static String getName() {
+        return userName;
+        //return this.name != null ? name.getText().toString() : defaultVal;
+    }
+
     @Override
     public void onClick(View v) {
+        userName = name.getText().toString();
         this.activity.onSubmit();
     }
 }

@@ -15,7 +15,7 @@
         android:paddingLeft="10dp">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="230dp" android:layout_height="match_parent"
+    <TextView android:layout_width="230dp" android:layout_height="207dp"
         android:text="@string/start"
         android:id="@+id/label"
         android:textSize="35dp"
@@ -24,14 +24,15 @@
 
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/start"
-            android:layout_width="wrap_content"
+            android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:background="@color/kill"
             android:text="Join Game"
             android:clickable="true"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_gravity="center_horizontal|bottom"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="130dp" />
 
-</FrameLayout>
+    </FrameLayout>
 </FrameLayout>
