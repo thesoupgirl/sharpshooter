@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Player {
     private UUID id;
     private String name;
+    private String regId;
     private Player target;
     private int killCount;
     private String killNumber;
@@ -24,15 +25,17 @@ public class Player {
         this.killNumber = getRandomKillNumber();
         this.target = null;
         this.pictureByteString = "no picture";
+        this.regId = "no reg id";
     }
 
-    public Player(String name, String pictureByteString) {
+    public Player(String name, String regId, String pictureByteString) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.killCount = 0;
         this.killNumber = getRandomKillNumber();
         this.target = null;
         this.pictureByteString = pictureByteString;
+        this.regId = regId;
     }
 
 
@@ -80,6 +83,10 @@ public class Player {
 
     public String getPictureByteString() {
         return pictureByteString;
+    }
+
+    public String getRegId() {
+        return regId;
     }
 
     public void killTarget() {
