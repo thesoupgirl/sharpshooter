@@ -20,6 +20,9 @@ public class Game {
         this.players = new HashMap<>();
         this.globalKillCount = 0;
         this.inProgress = false;
+
+        Player dummyPlayer = new Player("dummy");
+        addPlayer(dummyPlayer);
     }
 
     public void addPlayer(Player player) {

@@ -21,6 +21,7 @@ public class FirstLoginActivity extends AppCompatActivity implements SubmitCallb
 
     private FirstLoginActivityFragment firstLoginActivityFragment;
     private BeforePhoto beforePhoto;
+    private StartGame startGame;
 
 //    public FirstLoginActivity firstLogin = new FirstLoginActivity();
 
@@ -30,6 +31,7 @@ public class FirstLoginActivity extends AppCompatActivity implements SubmitCallb
         setContentView(R.layout.activity_first_login);
         this.firstLoginActivityFragment = FirstLoginActivityFragment.newInstance(this);
         this.beforePhoto = BeforePhoto.newInstance(this);
+        this.startGame = StartGame.newInstance(this);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.fragment, this.firstLoginActivityFragment);
         ft.commit();
@@ -66,11 +68,29 @@ public class FirstLoginActivity extends AppCompatActivity implements SubmitCallb
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClick() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        StartGame frag = StartGame.newInstance(this);
+
+        ft.replace(R.id.start_game, frag);
+        Log.d("fuck me", "blow me");
+        ft.commit();
+    }
     public void onSubmit() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        StartGame frag = StartGame.newInstance(this);
+
+        ft.replace(R.id.first, frag);
+        Log.d("fuck me", "blow me");
+        ft.commit();
+    }
+
+    public void onSubmit(int j) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         BeforePhoto frag = BeforePhoto.newInstance(this);
 
-        ft.replace(R.id.first, frag);
+        ft.replace(R.id.start_game, frag);
         Log.d("fuck me", "blow me");
         ft.commit();
     }
