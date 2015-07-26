@@ -18,11 +18,13 @@ import android.view.Gravity;
 import java.util.Random;
 
 
+
 public class BeforePhoto extends Fragment{
 
     public SubmitCallbackListener activity;
     //public MyApp myApp;
     private ButtonRectangle cameraBtn; //camera button
+    private ButtonRectangle checkStatus;
     private TextView top;
     private TextView num;
     private TextView info;
@@ -65,7 +67,8 @@ public class BeforePhoto extends Fragment{
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_before_photo, container, false);
         cameraBtn = (ButtonRectangle) v.findViewById(R.id.cameraBtn);
-        top = (TextView) v.findViewById(R.id.frontalSelfie);
+        checkStatus = (ButtonRectangle) v.findViewById(R.id.status);
+        //top = (TextView) v.findViewById(R.id.frontalSelfie);
         num = (TextView) v.findViewById(R.id.numberID);
         info = (TextView) v.findViewById(R.id.target);
         targetName = (TextView) v.findViewById(R.id.targetName);

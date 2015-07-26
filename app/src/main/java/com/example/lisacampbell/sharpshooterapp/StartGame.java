@@ -16,14 +16,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+
+import com.example.lisacampbell.sharpshooterapp.service.RestService;
 import com.gc.materialdesign.views.ButtonRectangle;
 import android.app.FragmentTransaction;
+
 
 
 public class StartGame extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
+   // public RestService service = RestService.generateInstance();
     public SubmitCallbackListener activity;
     private ButtonRectangle startBtn; //camera button
     private TextView label;
@@ -66,8 +69,9 @@ public class StartGame extends Fragment{
         //v.findViewById(R.id.start).setOnClickListener();
         startBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //service.startGame();
 
-                Fragment frag = new BeforePhoto();
+                Fragment frag = new Ready();
 
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();

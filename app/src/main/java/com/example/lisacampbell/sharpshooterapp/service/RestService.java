@@ -26,7 +26,7 @@ public class RestService {
      * Public instantiator of the singleton
      * @return The single instance of the class
      */
-    public static RestService generateAppId() {
+    public static RestService generateInstance() {
         if(instance == null) {
             instance = new RestService();
         }
