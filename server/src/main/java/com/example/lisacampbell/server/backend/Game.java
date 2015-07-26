@@ -1,5 +1,6 @@
 package com.example.lisacampbell.server.backend;
 
+import com.example.lisacampbell.server.gcm.RegistrationEndpoint;
 import com.google.api.server.spi.response.ConflictException;
 
 import java.util.ArrayList;

@@ -98,8 +98,8 @@ public class MyEndpoint {
 
 
     @ApiMethod(name = "addPlayer", httpMethod = "POST")
-    public Player addPlayer(@Named("name") String name, @Named("byteString") String byteString) {
-        Player player = new Player(name, byteString);
+    public Player addPlayer(@Named("name") String name, @Named("regId") String regId ,@Named("byteString") String byteString) {
+        Player player = new Player(name, regId, byteString);
         game.addPlayer(player);
         return player;
     }
