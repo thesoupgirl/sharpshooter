@@ -1,7 +1,6 @@
 package com.example.lisacampbell.sharpshooterapp.service;
 
-import com.example.lisacampbell.backend.myApi.model.BooleanResponse;
-import com.example.lisacampbell.backend.myApi.model.PlayerResponse;
+import com.example.lisacampbell.sharpshooterapp.service.HttpRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +15,7 @@ import java.util.UUID;
  */
 public class RestService {
     private static RestService instance = null;
-    private static final String baseUrl = "sharpshooter-1017.appspot.com/_ah/api/myApi/v1/";
+    private static final String baseUrl = "https://sharpshooter-1017.appspot.com/_ah/api/myApi/v1/";
 
     private RestService() {
         /* Override default constructor */
@@ -44,9 +43,12 @@ public class RestService {
         String id = "";
 
         try {
-            id = new JSONObject(HttpRequest.post(baseUrl + "addPlayer")
-                    .send("name=" + name).send("regId="+regId).send("byteString="+byteString).
-                            body()).getString("id");
+            HttpRequest request = HttpRequest.post(baseUrl + "addPlayer");
+            request.trustAllCerts();
+            request.trustAllHosts();
+
+            id = new JSONObject(request.send("name=" + name).send("regId="+regId)
+                    .send("byteString="+byteString).body()).getString("id");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +61,11 @@ public class RestService {
      * Sends a request to the server to start the game
      */
     public void startGame() {
-        int response = HttpRequest.post(baseUrl + "startGame").send("").code();
+        HttpRequest request = HttpRequest.post(baseUrl + "startGame");
+        request.trustAllCerts();
+        request.trustAllHosts();
 
+        int response = request.code();
         if(response != 200) {
             System.out.println("Error with code " + response);
         }
@@ -70,7 +75,11 @@ public class RestService {
      * Restarts the instance of the game.
      */
     public void restartGame() {
-        int response = HttpRequest.post(baseUrl + "startGame").send("").code();
+        HttpRequest request = HttpRequest.post(baseUrl + "startGame");
+        request.trustAllCerts();
+        request.trustAllHosts();
+
+        int response = request.code();
 
         if(response != 200) {
             System.out.println("Error with code " + response);
@@ -85,8 +94,11 @@ public class RestService {
     public String getTarget(String playerId) {
         String response = "";
         try {
-            response = new JSONObject(HttpRequest.get(baseUrl + "getTargetFor")
-                    .send("playerId="+playerId).body()).getString("name");
+            HttpRequest request = HttpRequest.get(baseUrl + "getTargetFor");
+            request.trustAllCerts();
+            request.trustAllHosts();
+
+            response = new JSONObject(request.send("playerId=" + playerId).body()).getString("name");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -102,8 +114,11 @@ public class RestService {
     public ArrayList<String> getPlayers() {
         ArrayList<String> response = new ArrayList<>();
         try {
-            JSONArray jsonArray = new JSONObject(HttpRequest.get(baseUrl + "playerresponsecollection").body())
-                    .getJSONArray("items");
+            HttpRequest request = HttpRequest.get(baseUrl + "playerresponsecollection");
+            request.trustAllCerts();
+            request.trustAllHosts();
+
+            JSONArray jsonArray = new JSONObject(request.body()).getJSONArray("items");
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject player = jsonArray.getJSONObject(i);
                 response.add(player.getString("name"));
@@ -124,9 +139,12 @@ public class RestService {
     public Boolean attemptKill(String killerId, String killNumber) {
         Boolean success = false;
         try {
-            success = new JSONObject(HttpRequest.delete(baseUrl + "attemptKill")
-                    .send("killerId="+killerId).send("killNumber="+killNumber).body())
-                    .getBoolean("response");
+            HttpRequest request = HttpRequest.delete(baseUrl + "attemptKill");
+            request.trustAllCerts();
+            request.trustAllHosts();
+
+            success = new JSONObject(request.send("killerId=" + killerId)
+                    .send("killNumber=" + killNumber).body()).getBoolean("response");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -143,8 +161,12 @@ public class RestService {
     public Boolean playerAlive(String playerId) {
         Boolean alive = false;
         try {
-            alive = new JSONObject(HttpRequest.post(baseUrl + "playerAlive")
-                    .send("playerId="+playerId).body()).getBoolean("response");
+            HttpRequest request = HttpRequest.post(baseUrl + "playerAlive");
+            request.trustAllCerts();
+            request.trustAllHosts();
+
+            alive = new JSONObject(request.send("playerId=" + playerId).body())
+                    .getBoolean("response");
         }
         catch (Exception e) {
             e.printStackTrace();

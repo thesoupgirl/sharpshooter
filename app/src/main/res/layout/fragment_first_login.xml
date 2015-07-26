@@ -39,7 +39,7 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/buttoncolor"
+            android:background="@color/kill"
             android:text="Next"
             android:clickable="true"
             android:layout_alignParentBottom="true"

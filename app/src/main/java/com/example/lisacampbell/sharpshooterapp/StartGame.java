@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,14 +23,15 @@ import com.gc.materialdesign.views.ButtonRectangle;
 import android.app.FragmentTransaction;
 
 
-
 public class StartGame extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-   // public RestService service = RestService.generateInstance();
+
     public SubmitCallbackListener activity;
     private ButtonRectangle startBtn; //camera button
     private TextView label;
+    public RestService service = RestService.generateInstance();
+
 
     // TODO: Rename and change types and number of parameters
 //    public static StartGame newInstance(String param1, String param2) {
@@ -67,11 +69,16 @@ public class StartGame extends Fragment{
         label = (TextView) v.findViewById(R.id.label);
        // label.setGravity(Gravity.CENTER_HORIZONTAL);
         //v.findViewById(R.id.start).setOnClickListener();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         startBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //service.startGame();
 
-                Fragment frag = new Ready();
+                service.startGame();
+
+                Fragment frag = new BeforePhoto();
 
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
