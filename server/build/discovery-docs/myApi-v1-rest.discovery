@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/5-LTNNd_hq5kKB2w5ZB8lNDrQuM\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/kknzDnrOPV-8cqMI82lP7-Igxb4\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -193,29 +193,17 @@
  "methods": {
   "addPlayer": {
    "id": "myApi.addPlayer",
-   "path": "addPlayer/{name}/{regId}/{byteString}",
+   "path": "addPlayer/{name}",
    "httpMethod": "POST",
    "parameters": {
-    "byteString": {
-     "type": "string",
-     "required": true,
-     "location": "path"
-    },
     "name": {
-     "type": "string",
-     "required": true,
-     "location": "path"
-    },
-    "regId": {
      "type": "string",
      "required": true,
      "location": "path"
     }
    },
    "parameterOrder": [
-    "name",
-    "regId",
-    "byteString"
+    "name"
    ],
    "response": {
     "$ref": "Player"
