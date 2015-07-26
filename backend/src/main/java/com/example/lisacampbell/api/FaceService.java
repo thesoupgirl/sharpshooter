@@ -9,10 +9,10 @@ import com.facepp.http.PostParameters;
 
 import org.json.JSONObject;
 
-public class Api {
+public class FaceService {
     private static final HttpRequests httpRequests = new HttpRequests("c0f25c4a3284aa6bffbeaeee4b1047b9", "YwB89qNNLBza9BDQvj_8nJSbrFkaCALv", true, true);
 
-    public Api() {
+    public FaceService() {
         // Do nothing
     }
 
@@ -22,7 +22,7 @@ public class Api {
      * @param name The name of the person
      * @return personId
      */
-    public String createPerson(String name) {
+    public static String createPerson(String name) {
         String personId = "";
 
         try {
@@ -41,7 +41,7 @@ public class Api {
      * @param data Image represented by a byte array
      * @return faceId
      */
-    public String uploadFace(byte[] data) {
+    public static String uploadFace(byte[] data) {
         String faceId = "";
 
         try {
@@ -61,7 +61,7 @@ public class Api {
      * @param personId the personId of the person.
      * @param faceId The faceId of the Face.
      */
-    public void personAddFace(String personId, String faceId) {
+    public static void personAddFace(String personId, String faceId) {
         try {
             httpRequests.personAddFace(new PostParameters().setPersonId(personId).setFaceId(faceId));
         }
@@ -76,7 +76,7 @@ public class Api {
      * @param personId The id of the person to compare the face with
      * @return Whether the face belongs to the person
      */
-    public Boolean compareFace(String faceId, String personId) {
+    public static Boolean compareFace(String faceId, String personId) {
         boolean match = false;
 
         try {
