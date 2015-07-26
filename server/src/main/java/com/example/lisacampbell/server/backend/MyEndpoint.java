@@ -95,6 +95,13 @@ public class MyEndpoint {
         return game;
     }
 
+    @ApiMethod(name = "playerAlive", httpMethod = "GET")
+    public BooleanResponse checkPlayerAlive(@Named("playerId") String playerId) {
+        UUID id = UUID.fromString(playerId);
+        BooleanResponse response = new BooleanResponse();
+        response.setResponse(game.getPlayers().containsKey(id));
+        return response;
+    }
 
 
     @ApiMethod(name = "addPlayer", httpMethod = "POST")
