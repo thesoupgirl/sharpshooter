@@ -22,20 +22,31 @@ public class RestService {
         /* Override default constructor */
     }
 
-    private static RestService generateAppId() {
+    /**
+     * Public instantiator of the singleton
+     * @return The single instance of the class
+     */
+    public static RestService generateAppId() {
         if(instance == null) {
             instance = new RestService();
         }
         return instance;
     }
 
-    public UUID addPlayer(String name) {
-        UUID id = null;
+    /**
+     * Add a player to the server
+     * @param name The name of the player
+     * @param regId ???
+     * @param byteString ??? placeholder of image
+     * @return The String of the UUID
+     */
+    public String addPlayer(String name, String regId, String byteString) {
+        String id = "";
 
         try {
-            String strId = new JSONObject(HttpRequest.post(baseUrl + "addPlayer").send("name=" + name).body())
-                    .getString("id");
-            id = UUID.fromString(strId);
+            id = new JSONObject(HttpRequest.post(baseUrl + "addPlayer")
+                    .send("name=" + name).send("regId="+regId).send("byteString="+byteString).
+                            body()).getString("id");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -44,6 +55,9 @@ public class RestService {
         return id;
     }
 
+    /**
+     * Sends a request to the server to start the game
+     */
     public void startGame() {
         int response = HttpRequest.post(baseUrl + "startGame").send("").code();
 
@@ -52,6 +66,9 @@ public class RestService {
         }
     }
 
+    /**
+     * Restarts the instance of the game.
+     */
     public void restartGame() {
         int response = HttpRequest.post(baseUrl + "startGame").send("").code();
 
@@ -60,11 +77,16 @@ public class RestService {
         }
     }
 
-    public String getTarget() {
+    /**
+     * Calls the server with a GET request
+     * @param playerId The ID of the player
+     * @return The name of the target
+     */
+    public String getTarget(String playerId) {
         String response = "";
         try {
-            response = new JSONObject(HttpRequest.get(baseUrl + "getTargetFor").body())
-                    .getString("name");
+            response = new JSONObject(HttpRequest.get(baseUrl + "getTargetFor")
+                    .send("playerId="+playerId).body()).getString("name");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -73,6 +95,10 @@ public class RestService {
         return response;
     }
 
+    /**
+     * Gets an ArrayList of all the players names
+     * @return The ArrayList of all the players names
+     */
     public ArrayList<String> getPlayers() {
         ArrayList<String> response = new ArrayList<>();
         try {
@@ -89,10 +115,17 @@ public class RestService {
         return response;
     }
 
-    public Boolean attemptKill() {
+    /**
+     * Sends a request to the server to attempt a kill
+     * @param killerId The current player's id
+     * @param killNumber The attempted number that the player entered
+     * @return Whether the attempt was successful.
+     */
+    public Boolean attemptKill(String killerId, String killNumber) {
         Boolean success = false;
         try {
-            success = new JSONObject(HttpRequest.delete(baseUrl + "attemptKill").body())
+            success = new JSONObject(HttpRequest.delete(baseUrl + "attemptKill")
+                    .send("killerId="+killerId).send("killNumber="+killNumber).body())
                     .getBoolean("response");
         }
         catch (Exception e) {
@@ -102,16 +135,21 @@ public class RestService {
         return success;
     }
 
-    public Boolean checkStatus() {
-        Boolean success = false;
+    /**
+     * Sends a request to the server to determine if the player is alive.
+     * @param playerId The id of the current player in question.
+     * @return True if alive, false if dead.
+     */
+    public Boolean playerAlive(String playerId) {
+        Boolean alive = false;
         try {
-            success = new JSONObject(HttpRequest.delete(baseUrl + "checkStatus").body())
-                    .getBoolean("response");
+            alive = new JSONObject(HttpRequest.post(baseUrl + "playerAlive")
+                    .send("playerId="+playerId).body()).getBoolean("response");
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        return success;
+        return alive;
     }
 }

@@ -56,18 +56,6 @@ public class MyEndpoint {
         return response;
     }
 
-    @ApiMethod(name = "checkStatus", httpMethod = "GET")
-    public BooleanResponse checkStatus(@Named("playerId") String playerId) {
-        BooleanResponse response = new BooleanResponse();
-        if(!game.getPlayers().containsKey(UUID.fromString(playerId))) {
-            response.setResponse(false);
-        }
-        else {
-            response.setResponse(true);
-        }
-        return response;
-    }
-
     @ApiMethod(name = "getPlayers", httpMethod = "GET")
     public Set<PlayerResponse> getPlayers() {
         Set<PlayerResponse> players = new HashSet<>();
