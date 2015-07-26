@@ -45,7 +45,9 @@ public class RestService {
             request.trustAllCerts();
             request.trustAllHosts();
 
-            id = new JSONObject(request.send("name=" + name).body()).getString("id");
+            String player = request.send("name=" + name).body();
+
+            id = new JSONObject(player).getString("id");
         }
         catch (Exception e) {
             e.printStackTrace();
