@@ -35,11 +35,9 @@ public class RestService {
     /**
      * Add a player to the server
      * @param name The name of the player
-     * @param regId ???
-     * @param byteString ??? placeholder of image
      * @return The String of the UUID
      */
-    public String addPlayer(String name, String regId, String byteString) {
+    public String addPlayer(String name) {
         String id = "";
 
         try {
@@ -47,8 +45,7 @@ public class RestService {
             request.trustAllCerts();
             request.trustAllHosts();
 
-            id = new JSONObject(request.send("name=" + name).send("regId="+regId)
-                    .send("byteString="+byteString).body()).getString("id");
+            id = new JSONObject(request.send("name=" + name).body()).getString("id");
         }
         catch (Exception e) {
             e.printStackTrace();
