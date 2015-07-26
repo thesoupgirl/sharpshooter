@@ -24,7 +24,7 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
     private ButtonRectangle next; //next button
     public static String userName; //value inputted by user
     public boolean clicky = false;
-    public String id;
+    public static String id;
     public RestService service = RestService.generateInstance();
 
     public FirstLoginActivityFragment() {
@@ -69,9 +69,9 @@ public class FirstLoginActivityFragment extends Fragment implements OnClickListe
     @Override
     public void onClick(View v) {
         userName = name.getText().toString();
-//
-//        id = service.addPlayer(userName);
-//        Log.d(id, "========================================================================"+id);
+
+        id = service.addPlayer(userName);
+        Log.d(id, "========================================================================"+id);
         this.activity.onSubmit();
     }
 }

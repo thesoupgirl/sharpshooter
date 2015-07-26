@@ -6,12 +6,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.widget.EditText;
+
+import com.example.lisacampbell.sharpshooterapp.service.RestService;
 import com.gc.materialdesign.views.ButtonRectangle;
 import android.widget.TextView;
 import android.view.Gravity;
@@ -21,6 +25,8 @@ import java.util.Random;
 
 public class BeforePhoto extends Fragment{
 
+    public String input ="";
+
     public SubmitCallbackListener activity;
     //public MyApp myApp;
     private ButtonRectangle cameraBtn; //camera button
@@ -29,6 +35,8 @@ public class BeforePhoto extends Fragment{
     private TextView num;
     private TextView info;
     private TextView targetName;
+    private EditText killNumy;
+    public RestService service = RestService.generateInstance();
     public String thingy;
     public int victimNum; //number that person can be killed by
     //private OnFragmentInteractionListener mListener;
@@ -38,6 +46,8 @@ public class BeforePhoto extends Fragment{
     public static BeforePhoto newInstance(SubmitCallbackListener activity) {
         BeforePhoto f = new BeforePhoto();
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         f.activity = activity;
         return f;
     }
@@ -64,6 +74,10 @@ public class BeforePhoto extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        service.getTarget(FirstLoginActivityFragment.id);
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_before_photo, container, false);
         cameraBtn = (ButtonRectangle) v.findViewById(R.id.cameraBtn);
@@ -72,13 +86,18 @@ public class BeforePhoto extends Fragment{
         num = (TextView) v.findViewById(R.id.numberID);
         info = (TextView) v.findViewById(R.id.target);
         targetName = (TextView) v.findViewById(R.id.targetName);
+        killNumy = (EditText) v.findViewById(R.id.killnum);
+
+
 
        num.setText((CharSequence) thingy);
        // top.setGravity(Gravity.CENTER_HORIZONTAL);
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                input = killNumy.getText().toString();
                 Fragment frag = new WinScreen();
+
+                service.attemptKill(FirstLoginActivityFragment.id, input);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.screen, frag);
