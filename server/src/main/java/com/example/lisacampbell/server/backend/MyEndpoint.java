@@ -58,7 +58,7 @@ public class MyEndpoint {
 
     @ApiMethod(name = "getPlayers", httpMethod = "GET")
     public Set<PlayerResponse> getPlayers() {
-        Set<PlayerResponse> players = new HashSet<PlayerResponse>();
+        Set<PlayerResponse> players = new HashSet<>();
         for (Player player : game.getPlayers().values()){
             players.add(new PlayerResponse(player));
         }
@@ -95,11 +95,18 @@ public class MyEndpoint {
         return game;
     }
 
+    @ApiMethod(name = "playerAlive", httpMethod = "GET")
+    public BooleanResponse checkPlayerAlive(@Named("playerId") String playerId) {
+        UUID id = UUID.fromString(playerId);
+        BooleanResponse response = new BooleanResponse();
+        response.setResponse(game.getPlayers().containsKey(id));
+        return response;
+    }
 
 
     @ApiMethod(name = "addPlayer", httpMethod = "POST")
-    public Player addPlayer(@Named("name") String name, @Named("byteString") String byteString) {
-        Player player = new Player(name, byteString);
+    public Player addPlayer(@Named("name") String name, @Named("regId") String regId ,@Named("byteString") String byteString) {
+        Player player = new Player(name, regId, byteString);
         game.addPlayer(player);
         return player;
     }

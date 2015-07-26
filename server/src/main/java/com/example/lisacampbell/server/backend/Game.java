@@ -1,5 +1,6 @@
 package com.example.lisacampbell.server.backend;
 
+import com.example.lisacampbell.server.gcm.RegistrationEndpoint;
 import com.google.api.server.spi.response.ConflictException;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * Created by kieran on 7/25/15.
+ * Created by kieran on 7/25/15
  */
 public class Game {
 
@@ -16,7 +17,7 @@ public class Game {
     private boolean inProgress;
 
     public Game() {
-        this.players = new HashMap<UUID, Player>();
+        this.players = new HashMap<>();
         this.globalKillCount = 0;
         this.inProgress = false;
     }
@@ -79,6 +80,9 @@ public class Game {
         if (!players.values().contains(killer)) {
             return false;
         }
+
+        System.out.println("Killers Number: " + killer.getTarget().getKillNumber());
+        System.out.println("Attempt: " + killNumber);
 
         if(killer.getTarget().getKillNumber().equals(killNumber)) {
             return executeKill(killer);

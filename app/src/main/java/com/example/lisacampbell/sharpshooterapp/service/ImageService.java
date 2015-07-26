@@ -1,4 +1,4 @@
-package com.example.lisacampbell.sharpshooterapp;
+package com.example.lisacampbell.sharpshooterapp.service;
 
 import android.os.Environment;
 import android.util.Base64;
